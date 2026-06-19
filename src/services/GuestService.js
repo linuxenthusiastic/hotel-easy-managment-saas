@@ -1,43 +1,46 @@
-import GuestFactory from '../models/GuestFactory.js'
+import GuestFactory from "../models/GuestFactory.js";
 
 class GuestService {
-    constructor(GuestRepository){
-        this.GuestRepository = GuestRepository;
-    }
-    findAll(){
-        return this.GuestRepository.findAll();
-    }
+  constructor(GuestRepository) {
+    this.GuestRepository = GuestRepository;
+  }
+  findAll() {
+    return this.GuestRepository.findAll();
+  }
 
-    findById(id){
-        const guest =  this.GuestRepository.findById(id);
+  findById(id) {
+    const guest = this.GuestRepository.findById(id);
 
-        if(!guest){
-            throw new Error(`Huesped con id: ${id} no ha sido encontrado`);
-        }
-
-        return guest;
+    if (!guest) {
+      throw new Error(`Huesped con id: ${id} no ha sido encontrado`);
     }
 
-    findByDocument(document){
-        const guest = this.GuestRepository.findByDocument(document);
+    return guest;
+  }
 
-        if(!guest){
-            throw new Error(`El huesped con documento ${document} no ha sido encontrado`);
-        }
+  findByDocument(document) {
+    const guest = this.GuestRepository.findByDocument(document);
 
-        return guest;
+    if (!guest) {
+      throw new Error(
+        `El huesped con documento ${document} no ha sido encontrado`,
+      );
     }
 
-    
-    create(data){
-        const guest = GuestFactory.create(data);
+    return guest;
+  }
 
-        if(this.GuestRepository.findByDocument(guest.document_number)){
-            throw new Error(`Ya existe un huésped con el documento ${guest.document_number}`)
-        }
+  create(data) {
+    const guest = GuestFactory.create(data);
 
-        return this.GuestRepository.save(guest);
+    if (this.GuestRepository.findByDocument(guest.document_number)) {
+      throw new Error(
+        `Ya existe un huésped con el documento ${guest.document_number}`,
+      );
     }
+
+    return this.GuestRepository.save(guest);
+  }
 }
 
 export default GuestService;
