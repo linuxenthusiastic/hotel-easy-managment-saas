@@ -2,6 +2,7 @@ import Database from 'better-sqlite3'
 import path from 'path'
 import { fileURLToPath } from 'url'
 import dotenv from 'dotenv'
+import { initDatabase } from '../../database/init.js'
 
 dotenv.config()
 
@@ -14,6 +15,8 @@ const db = new Database(dbPath)
 
 db.pragma('foreign_keys = ON')
 db.pragma('journal_mode = WAL')
+
+initDatabase(db)
 
 console.log(`Base de datos conectada: ${dbPath}`)
 
