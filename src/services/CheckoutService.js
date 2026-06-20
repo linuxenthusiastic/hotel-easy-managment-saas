@@ -1,6 +1,6 @@
 import { getReservationState } from "../models/ReservationState.js";
 
-const LATE_CHECKOUT_HORA_LIMITE = 12;
+const LATE_CHECKOUT_HOUR_LIMIT = 12;
 const LATE_CHECKOUT_CARGO = 30;
 
 class CheckoutService {
@@ -19,7 +19,7 @@ class CheckoutService {
     if (!checkin) throw new Error("No se encontro el checkin");
 
     const now = new Date();
-    const isLate = now.getHours() >= LATE_CHECKOUT_HORA_LIMITE;
+    const isLate = now.getHours() >= LATE_CHECKOUT_HOUR_LIMIT;
     const lateFee = isLate ? LATE_CHECKOUT_CARGO : 0;
 
     this.checkinRepository.saveCheckout(reservationId, isLate, lateFee, notes);
