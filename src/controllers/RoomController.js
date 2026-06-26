@@ -2,6 +2,13 @@ class RoomController {
     constructor(RoomService){
         this.RoomService = RoomService;
     }
+    getAll(req, res) {
+        try {
+            res.json(this.RoomService.getAll())
+        } catch (error) {
+            res.status(500).json({ error: error.message })
+        }
+    }
     availableRooms(req,res){
         try{
             const {checkIn , checkOut , type} = req.query;
