@@ -5,6 +5,6 @@ export default defineConfig({
   plugins: [
     handlebars({
       partialDirectory: './src/partials',
-    })
-  ]
+    }),
+  ],
 })
